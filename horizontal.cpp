@@ -9,16 +9,11 @@ int main(){
     cout << "height?";
     cin >> height;
 
-    if (height % 2 == 0){
-        system("cls");
-        cout << "height?";
-        cin >> height;
-    }
     
     int width = (2*height) - 2;
 
     // いったん描画をクリア
-    system("cls");
+    system("cls");      //Linuxならclear
 
     // 表示用の配列の初期化
     vector<vector<char>> output;
@@ -62,7 +57,7 @@ int main(){
     while(true){
         
         // 表示を初期化
-        system("cls");
+        system("cls");  //Linuxならclear
 
         // 先頭を最後に移動
         for (int iy = 0; iy < height; iy++){
