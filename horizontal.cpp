@@ -6,18 +6,19 @@ using namespace std;
 int main(){
     // 縦-----------------------------------
     int height = 0;
-    cout << "height";
+    cout << "height?";
     cin >> height;
 
     if (height % 2 == 0){
         system("cls");
+        cout << "height?";
         cin >> height;
     }
     
-    int width = (2*height) - 1;
+    int width = (2*height) - 2;
 
+    // いったん描画をクリア
     system("cls");
-
 
     // 表示用の配列の初期化
     vector<vector<char>> output;
@@ -25,37 +26,38 @@ int main(){
     // 構成
     for (int y = 0; y < height; y++){
         output.push_back(vector<char>{});
+        int now_point = 0;
 
+        // 一つ目
         for (int iy = 0; iy < y; iy++){
             output.at(y).push_back(' ');
+            now_point++;
         }
-        
+
         output.at(y).push_back('#');
+        now_point++;
 
-        
-        int p = (width-y)/(2*(height-y+1));
-        int s = (2*(height-y+1))-1;
+        // 一つ目を含めた二つ目との間隔
+        int s = 2*(height -y +1) -5;
 
-        for (int ip = 0; ip < p; ip++){
+
+        // 二つ目
+        if(y != 0 && y != height-1){
             for(int is = 0; is < s; is++){
-                output.at(y).push_back(' ');  
+                output.at(y).push_back(' ');
+                now_point++;
             }
             output.at(y).push_back('#');
+            now_point++;
+        }
+        
+
+        // 最後余った領域に空白
+        for(int iLy = 0; iLy < (width -now_point); iLy++){
+            output.at(y).push_back(' ');
         }
 
     }
-
-    for (int i = 0; i < output.size(); i++) {
-        for (int j = 0; j < output[i].size(); j++) {
-            cout << output[i][j];
-            cout << ",";
-        }
-        cout << endl; // 行ごとに改行
-    }
-
-
-    /*// 時間管理用
-    int time = 0;
     
     while(true){
         
@@ -63,17 +65,20 @@ int main(){
         system("cls");
 
         // 先頭を最後に移動
-        for (int ih = 0; ih < height; ih++){
-            grid[ih].push_back(grid[ih][0]);
-            grid[ih].erase(grid[ih].begin());
+        for (int iy = 0; iy < height; iy++){
+            output.at(iy).push_back(output.at(iy).at(0));
+            output.at(iy).erase(output.at(iy).begin());
         }
 
-
-
-        // 時間の調節
-        time++;
-        this_thread::sleep_for(chrono::milliseconds(200));
-    }*/
+        for (int i = 0; i < output.size(); i++) {
+            for (int j = 0; j < output[i].size(); j++) {
+                cout << output[i][j];
+                
+            }
+            cout << endl; // 行ごとに改行
+        }
+        this_thread::sleep_for(chrono::milliseconds(50));
+    }
 
 
 }
