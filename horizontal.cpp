@@ -3,6 +3,14 @@
 #include <chrono>
 using namespace std;
 
+void clear_screen() {
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+}
+
 int main(){
     // 縦-----------------------------------
     int height = 0;
@@ -13,7 +21,7 @@ int main(){
     int width = (2*height) - 2;
 
     // いったん描画をクリア
-    system("cls");      //Linuxならclear
+    clear_screen();
 
     // 表示用の配列の初期化
     vector<vector<char>> output;
@@ -34,7 +42,6 @@ int main(){
 
         // 一つ目を含めた二つ目との間隔
         int s = 2*(height -y +1) -5;
-
 
         // 二つ目
         if(y != 0 && y != height-1){
@@ -57,7 +64,7 @@ int main(){
     while(true){
         
         // 表示を初期化
-        system("cls");  //Linuxならclear
+        clear_screen();
 
         // 先頭を最後に移動
         for (int iy = 0; iy < height; iy++){
